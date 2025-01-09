@@ -22,7 +22,10 @@ public class SpringbootJpaApplication implements CommandLineRunner {
 
 	@Override
 	public void run(String... args) throws Exception {
-		List<Person> persons = (List<Person>) personRepository.findAll();
+		// List<Person> persons = (List<Person>) personRepository.findAll();
+		// List<Person> persons = (List<Person>)
+		// personRepository.buscarByProgrammingLanguageAndName("Java", "Andres");
+		List<Person> persons = (List<Person>) personRepository.findByProgrammingLanguageAndName("Java", "Andres");
 
 		persons.stream().forEach(p -> System.out.println(p));
 	}
