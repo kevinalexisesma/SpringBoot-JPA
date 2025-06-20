@@ -28,13 +28,15 @@ public class SpringbootJpaApplication implements CommandLineRunner {
 	}
 
 	public void findOne() {
-		// Person person = null;
-		// Optional<Person> optional = personRepository.findById(1L);
-		// if (optional.isPresent()) {
-		// 	person = optional.get();
-		// }
-		// System.out.println(person);
-		personRepository.findById(1L).ifPresent(System.out::println);
+		/*
+		 * Person person = null;
+		 * Optional<Person> optional = personRepository.findOneName("Andres");
+		 * if (optional.isPresent()) {
+		 * person = optional.get();
+		 * }
+		 * System.out.println(person);
+		 */
+		personRepository.findByNameContaining("pe").ifPresent(System.out::println);
 	}
 
 	public void list() {
