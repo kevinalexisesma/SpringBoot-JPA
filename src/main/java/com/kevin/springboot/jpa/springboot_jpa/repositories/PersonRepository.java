@@ -10,6 +10,9 @@ import com.kevin.springboot.jpa.springboot_jpa.entities.Person;
 
 public interface PersonRepository extends CrudRepository<Person, Long> {
 
+    @Query("SELECT new Person(p.name, p.lastName) from Person p")
+    List<Person> findAllObjectPersonPersonalized();
+
     @Query("SELECT p.name FROM Person p where p.id = ?1")
     String getNameById(Long id);
 
@@ -36,6 +39,9 @@ public interface PersonRepository extends CrudRepository<Person, Long> {
     List<Person> buscarByProgrammingLanguage(String programmingLanguage, String name);
 
     List<Person> findByProgrammingLanguageAndName(String programmingLanguage, String name);
+
+    @Query("SELECT p, p.programmingLanguage FROM Person p")
+    List<Object[]> findAllMixPersonDataList();
 
     @Query("SELECT p.id, p.name, p.lastName, p.programmingLanguage FROM Person p")
     List<Object[]> obtenerPersonDataList();
