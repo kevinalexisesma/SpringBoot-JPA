@@ -6,9 +6,13 @@ import java.util.Optional;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 
+import com.kevin.springboot.jpa.springboot_jpa.dto.PersonDto;
 import com.kevin.springboot.jpa.springboot_jpa.entities.Person;
 
 public interface PersonRepository extends CrudRepository<Person, Long> {
+
+    @Query("SELECT new com.kevin.springboot.jpa.springboot_jpa.dto.PersonDto(p.name, p.lastName) from Person p")
+    List<PersonDto> findAllPersonDto();
 
     @Query("SELECT new Person(p.name, p.lastName) from Person p")
     List<Person> findAllObjectPersonPersonalized();
