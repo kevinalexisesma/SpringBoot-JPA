@@ -26,7 +26,34 @@ public class SpringbootJpaApplication implements CommandLineRunner {
 
 	@Override
 	public void run(String... args) throws Exception {
-		personalizedQueriesDistinct();
+		personalizedQueriesConcatUpperAndLowerCase();
+	}
+
+	@Transactional(readOnly = true)
+	public void personalizedQueriesConcatUpperAndLowerCase() {
+		System.out
+				.println("=================== Consulta nombres y apellidos de personas =================== ");
+		List<String> fullNames = personRepository.findAllFullNameConcat();
+		fullNames.forEach(System.out::println);
+
+		System.out
+				.println("=================== Consulta nombres y apellidos mayúscula =================== ");
+		List<String> fullNamesUpper = personRepository.findAllFullNameConcatUpper();
+		fullNamesUpper.forEach(System.out::println);
+
+		System.out
+				.println("=================== Consulta nombres y apellidos minúscula =================== ");
+		List<String> fullNamesLower = personRepository.findAllFullNameConcatLower();
+		fullNamesLower.forEach(System.out::println);
+		System.out
+				.println("=================== Consulta personalizada persona upper lower case =================== ");
+		List<Object[]> personsRegs = personRepository.findAllPersonDataListCase();
+		personsRegs.forEach(reg -> {
+			System.out.println("id=" + reg[0] +
+					", name=" + reg[1] +
+					", apellido=" + reg[2] +
+					", programmingLanguage=" + reg[3]);
+		});
 	}
 
 	@Transactional(readOnly = true)
