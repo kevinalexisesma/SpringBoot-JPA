@@ -11,11 +11,15 @@ import com.kevin.springboot.jpa.springboot_jpa.entities.Person;
 
 public interface PersonRepository extends CrudRepository<Person, Long> {
 
-    @Query("SELECT p FROM Person p WHERE p.name BETWEEN 'J' AND 'Q'")
-    List<Person> findAllBetweenName();
+    List<Person> findByIdBetween(Long id1, Long id2);
 
-    @Query("SELECT p FROM Person p WHERE p.id BETWEEN 2 AND 5")
-    List<Person> findAllBetweenId();
+    List<Person> findByNameBetween(String name1, String name2);
+
+    @Query("SELECT p FROM Person p WHERE p.name BETWEEN ?1 AND ?2")
+    List<Person> findAllBetweenName(String c1, String c2);
+
+    @Query("SELECT p FROM Person p WHERE p.id BETWEEN ?1 AND ?2")
+    List<Person> findAllBetweenId(Integer id1, Integer id2);
 
     @Query("SELECT p.id, UPPER(p.name), LOWER(p.lastName), UPPER(p.programmingLanguage) FROM Person p")
     List<Object[]> findAllPersonDataListCase();
