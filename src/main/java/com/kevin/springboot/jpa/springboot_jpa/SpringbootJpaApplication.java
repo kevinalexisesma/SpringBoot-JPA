@@ -38,8 +38,11 @@ public class SpringbootJpaApplication implements CommandLineRunner {
 
 		System.out
 				.println("=================== Consulta por rangos de nombres =================== ");
-		List<Person> personsBetName = personRepository.findByNameBetweenOrderByNameDescLastNameAsc("J", "Q");
-		personsBetName.forEach(System.out::println);
+		persons = personRepository.findByNameBetweenOrderByNameDescLastNameDesc("J", "Q");
+		persons.forEach(System.out::println);
+
+		persons = personRepository.findAllByOrderByNameAscLastNameDesc();
+		persons.forEach(System.out::println);
 	}
 
 	@Transactional(readOnly = true)
