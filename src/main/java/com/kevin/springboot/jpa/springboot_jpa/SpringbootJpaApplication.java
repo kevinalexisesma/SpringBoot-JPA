@@ -33,12 +33,12 @@ public class SpringbootJpaApplication implements CommandLineRunner {
 	public void personalizedQueriesBetween() {
 		System.out
 				.println("=================== Consulta por rangos =================== ");
-		List<Person> persons = personRepository.findByIdBetween(2L, 5L);
+		List<Person> persons = personRepository.findByIdBetweenOrderByNameAsc(2L, 5L);
 		persons.forEach(System.out::println);
 
 		System.out
 				.println("=================== Consulta por rangos de nombres =================== ");
-		List<Person> personsBetName = personRepository.findByNameBetween("J", "Q");
+		List<Person> personsBetName = personRepository.findByNameBetweenOrderByNameDescLastNameAsc("J", "Q");
 		personsBetName.forEach(System.out::println);
 	}
 
