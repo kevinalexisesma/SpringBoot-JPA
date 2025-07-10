@@ -11,6 +11,9 @@ import com.kevin.springboot.jpa.springboot_jpa.entities.Person;
 
 public interface PersonRepository extends CrudRepository<Person, Long> {
 
+    @Query("SELECT p from Person p WHERE p.id IN ?1")
+    List<Person> getPersonsByIds(List<Long> ids);
+
     @Query("SELECT p FROM Person p WHERE p.id = (SELECT MAX(p2.id) FROM Person p2)")
     Optional<Person> getLastRegistration();
 
