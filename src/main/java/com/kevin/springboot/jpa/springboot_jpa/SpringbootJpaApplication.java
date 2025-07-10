@@ -33,16 +33,32 @@ public class SpringbootJpaApplication implements CommandLineRunner {
 	public void queriesFunctionAggregation() {
 		System.out.println(
 				"=================== Consulta con el total de registros de la tabla persona ===================");
-		Long count = personRepository.totalPerson();
+		Long count = personRepository.getTotalPerson();
 		System.out.println("Total de personas: " + count);
 
 		System.out.println("=================== Consulta con el id mínimo de la tabla persona ===================");
-		Long minId = personRepository.minId();
+		Long minId = personRepository.getMinId();
 		System.out.println("Id mínimo de personas: " + minId);
 
 		System.out.println("=================== Consulta con el id máximo de la tabla persona ===================");
-		Long maxId = personRepository.maxId();
+		Long maxId = personRepository.getMaxId();
 		System.out.println("Id máximo de personas: " + maxId);
+
+		System.out.println("=================== Consulta el nombre y su largo ===================");
+		List<Object[]> personNameLength = personRepository.getPersonNameLength();
+		personNameLength.forEach(reg -> {
+			String name = (String) reg[0];
+			Integer length = (Integer) reg[1];
+			System.out.println("Nombre: " + name + ", Largo: " + length);
+		});
+
+		System.out.println("=================== Consulta con el nombre más corto ===================");
+		Integer minLengthName = personRepository.getMinLengthName();
+		System.out.println("Nombre más corto tiene " + minLengthName + " caracteres");
+
+		System.out.println("=================== Consulta con el nombre más largo ===================");
+		Integer maxLengthName = personRepository.getMaxLengthName();
+		System.out.println("Nombre más largo tiene " + maxLengthName + " caracteres");
 	}
 
 	@Transactional(readOnly = true)
