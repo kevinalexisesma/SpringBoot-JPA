@@ -26,7 +26,23 @@ public class SpringbootJpaApplication implements CommandLineRunner {
 
 	@Override
 	public void run(String... args) throws Exception {
-		queriesFunctionAggregation();
+		subQueries();
+	}
+
+	@Transactional(readOnly = true)
+	public void subQueries() {
+		System.out.println("=================== Consulta con el nombre más corto y su largo ===================");
+		List<Object[]> shorterName = personRepository.getShorterName();
+		shorterName.forEach(reg -> {
+			String name = (String) reg[0];
+			Integer length = (Integer) reg[1];
+			System.out.println("Nombre: " + name + ", Largo: " + length);
+		});
+
+		System.out
+				.println("=================== Consulta con el último registro de la tabla persona ===================");
+		Optional<Person> lastRegistration = personRepository.getLastRegistration();
+		lastRegistration.ifPresent(person -> System.out.println("Último registro: " + person));
 	}
 
 	@Transactional(readOnly = true)
